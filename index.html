@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curreny Convertor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="lastUpdate"></div>
+        <div class="links">
+            <a href="https://github.com/maaz-i7" target="_blank"><img class="linkIcons" src="./Assets/github-svgrepo-com.svg" alt="github"></a>
+            <a href="https://www.linkedin.com/in/maaz-khan-b8109a284/" target="_blank"><img class="linkIcons" src="./Assets/linkedin-svgrepo-com.svg" alt="linkedin"></a>
+            <a href="https://www.instagram.com/maaz.i7/" target="_blank"><img class="linkIcons" src="./Assets/instagram-svgrepo-com.svg" alt="ig"></a>
+        </div>
+    </nav>
+    
+    <div class="convertorBox">
+        <div class="title">Curreny Convertor</div>
+        <div class="convertArea">
+            
+            <div class="convertDiv">
+                <div class="fromDiv">
+                    <div class="fromBox">
+                        <div class="amount">
+                            <input class="inputAmt" type="number" placeholder="Amount">
+                        </div>
+                        <div data-value="eur" class="fromCurrSelect"><img class="flags" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/330px-Flag_of_Europe.svg.png" alt="flag">
+                        <div class="fromCurrNames fromCurrName0">EUR</div></div>
+                    </div>
+
+                    <div class="fromListDiv">
+                        <div class="fromList"></div>
+                    </div>
+                </div>
+
+                <img class="exchangeSvg" src="./Assets/exchange-svgrepo-com.svg" alt="exchangeSvg">
+
+                <div class="toDiv">
+                    <div class="toBox">
+                        <div class="value"></div>
+                        <div data-value="eur" class="toCurrSelect"><img class="flags" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/330px-Flag_of_Europe.svg.png" alt="flag">
+                        <div class="fromCurrNames fromCurrName0">EUR</div></div>
+                    </div>
+
+                    <div class="toListDiv">
+                        <div class="toList"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="equivalenceDiv"></div>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

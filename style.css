@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Londrina+Outline&family=Momo+Trust+Display&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Pacifico&family=Roboto:ital,wght@0,100..900;1,100..900&family=Schoolbell&family=Varela+Round&display=swap');
+/* font-family: "Momo Trust Display", sans-serif; */
+/* font-family: "Varela Round", sans-serif; */
+
+@media screen and (max-width: 1050px) {
+    
+    .convertorBox {
+        transform: scale(0.7) !important;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    
+    .convertorBox {
+        
+        height: 90vh !important;
+        margin-top: 0px !important;
+    }
+
+    .convertDiv {
+
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .exchangeSvg {
+
+        margin-bottom: 30px;
+    }
+}
+
+
+* {
+
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(213, 215, 217);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav {
+
+    height: 10%;
+    width: 100%;
+    background-color: rgb(142, 142, 142);
+    display: flex;
+    align-items: center;
+    color: rgb(0, 0, 0);
+    font-family: "Varela Round", sans-serif;
+}
+
+.linkIcons {
+    width: 20px;
+    color: aliceblue;
+    margin-left: 10px;
+}
+
+.links {
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.lastUpdate {
+    
+    margin-left: 10px;
+    font-size: 15px;
+}
+
+.convertorBox {
+
+    width: 1000px;
+    height: 60%;
+    background-color: white;
+    margin-top: 80px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 5px 5px 20px black;
+}
+
+.convertArea {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+
+    background-color: rgb(18, 18, 58);
+    color: white;
+    font-family: "Momo Trust Display", sans-serif;
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.exchangeSvg {
+
+    width: 40px;
+    margin-left: 40px;
+    margin-right: 40px;
+    cursor: pointer;
+    background-color: rgb(181, 193, 196);
+    padding: 10px;
+    border-radius: 40px;
+    transition-property: background-color;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0s;
+}
+
+.exchangeSvg:hover {
+
+    background-color: rgb(144, 144, 144);
+}
+
+.arrowSvg {
+
+    width: 10px;
+    margin-left: 5px;
+}
+
+input {
+    
+    width: 190px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+}
+
+.amount,
+.value {
+
+    width: 180px;
+    height: 30px;
+    border: 1px solid gray;
+    background-color: white;
+    font-size: 24px;
+    font-family: "Calibri", sans-serif;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    overflow: auto;
+}
+
+.convertDiv {
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 100px;
+}
+
+.fromBox,
+.toBox {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fromDiv,
+.toDiv {
+
+    width: 330px;
+}
+
+.fromCurrSelect,
+.toCurrSelect {
+
+    font-family: "Varela Round", sans-serif;
+    width: 100px;
+    height: 30px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.fromListDiv,
+.toListDiv {
+
+    width: 120px;
+    height: 50px;
+    height: 30px;
+    margin-left: auto;
+    position: relative;
+}
+
+.fromList,
+.toList {
+
+    width: 120px;
+    visibility: hidden;
+    height: 200px;
+    overflow: scroll;
+    position: absolute;
+    top: 0;
+    background-color: white;
+    border: 1px solid gray;
+}
+
+.fromOptions,
+.toOptions {
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    font-family: "Varela Round", sans-serif;
+    cursor: pointer;
+}
+
+.fromOptions:hover,
+.toOptions:hover {
+    background-color: rgb(173, 210, 246);
+}
+
+.flags {
+
+    width: 25px;
+    margin-right: 5px;
+}
+
+.equivalenceDiv {
+
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    margin-top: 30px;
+    font-family: "Calibri", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+}
