@@ -5,28 +5,49 @@
 @media screen and (max-width: 1050px) {
     
     .convertorBox {
-        transform: scale(0.7) !important;
+
+        width: 100vw !important;
+        height: 60vh !important;
+        transform: scale(0.9) !important;
     }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 850px) {
     
     .convertorBox {
-        
-        height: 90vh !important;
-        margin-top: 0px !important;
+
+        width: 100vw !important;
+        height: 80vh !important;
+    }
+
+    .convertArea {
+
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    nav {
+        width: 100vw !important;
     }
 
     .convertDiv {
 
         flex-direction: column !important;
-        justify-content: center !important;
         align-items: center !important;
+        justify-content: center !important;
+        margin-top: 10vw !important;
+    }
+
+    .equivalenceDiv {
+
+        width: 80vw !important;
     }
 
     .exchangeSvg {
 
-        margin-bottom: 30px;
+        transform: rotate(90deg) !important;
+        margin-bottom: 20px;
+        margin-top: -10px !important;
     }
 }
 
