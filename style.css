@@ -16,6 +16,7 @@
     
     .convertorBox {
 
+        margin-top: 5vw !important;
         width: 100vw !important;
         height: 80vh !important;
     }
@@ -272,3 +273,4 @@ input {
     font-weight: 400;
     font-size: 20px;
 }
+
