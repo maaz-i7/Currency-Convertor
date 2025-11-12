@@ -165,3 +165,36 @@ exchange.addEventListener('click', async () => {
 
     await update(fromCurr, toCurr, value);
 });
+
+let isLight = true;
+
+let toggleButton = document.querySelector('.darkModeToggle');
+
+toggleButton.addEventListener('click', () => {
+
+    document.body.classList.toggle('dark');
+    let circle = document.querySelector('.circle');
+    let darkModeToggle = document.querySelector('.darkModeToggle');
+
+    if(isLight === true) {
+
+        isLight = false;
+        circle.style.animation = 'none'; 
+        darkModeToggle.style.animation = 'none';
+        void circle.offsetWidth; 
+        void darkModeToggle.offsetWidth;
+        circle.style.animation = 'toggleCircle 500ms ease-in-out 0s forwards';
+        darkModeToggle.style.animation = 'toggleDiv 500ms ease-out 0s forwards';
+    }
+
+    else {
+        
+        isLight = true;
+        circle.style.animation = 'none'; 
+        darkModeToggle.style.animation = 'none';
+        void circle.offsetWidth; 
+        void darkModeToggle.offsetWidth;
+        circle.style.animation = 'toggleCircle 500ms ease-in-out 0s reverse forwards';
+        darkModeToggle.style.animation = 'toggleDiv 500ms ease-out 0s reverse forwards';
+    }
+});
