@@ -28,6 +28,10 @@
     }
 
     nav {
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100vw !important;
     }
 
@@ -36,7 +40,7 @@
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
-        margin-top: 10vw !important;
+        margin-top: 70px !important;
     }
 
     .equivalenceDiv {
@@ -96,6 +100,7 @@ nav {
     background-color: var(--bg2);
     display: flex;
     align-items: center;
+    align-items: center;
     color: var(--textColor);
     font-family: "Varela Round", sans-serif;
     transition: background-color 500ms ease-out 0s;
@@ -109,16 +114,21 @@ a {
 
     fill: var(--textColor);
     width: 20px;
-    margin-left: 10px;
 }
 
 .links {
+    
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin-right: 20px;
 }
 
 .lastUpdate {
     
     margin-left: 10px;
+    margin-right: 10px;
     font-size: 15px;
     font-weight: 700;
     color: var(--textColor);
@@ -216,7 +226,7 @@ input {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    margin-top: 100px;
+    margin-top: 80px;
 }
 
 .fromBox,
@@ -313,14 +323,6 @@ input {
     transition: background-color 500ms ease-out 0s;
 }
 
-.circle {
-
-    height: 20px;
-    width: 20px;
-    border-radius: 20px;
-    background-color: rgb(255, 255, 255);
-}
-
 @keyframes toggleDiv {
     
     from {
@@ -340,9 +342,17 @@ input {
     }
 
     to {
-        transform: translateX(30px);
+        transform: translateX(150%);
         background-color: gray;
     }
+}
+
+.circle {
+
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
 }
 
 .darkModeToggle {
@@ -354,6 +364,4 @@ input {
     padding: 4px;
     background-color: rgb(164, 164, 164);
     cursor: pointer;
-    margin-left: auto;
-    margin-right: 20px;
 }
