@@ -54,6 +54,10 @@
         margin-bottom: 20px;
         margin-top: -10px !important;
     }
+    
+    .lastUpdate {
+        font-size: 10px !important;
+    }
 }
 
 :root {
@@ -365,3 +369,4 @@ input {
     background-color: rgb(164, 164, 164);
     cursor: pointer;
 }
+
