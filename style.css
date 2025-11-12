@@ -52,6 +52,25 @@
     }
 }
 
+:root {
+
+    --bg1: rgb(191, 191, 191);
+    --bg2: white;
+    --bg3: white;
+    --bg4: rgb(10, 10, 56);
+    --bg5: rgb(168, 203, 249);
+    --textColor : black;
+}
+
+body.dark {
+
+    --bg1: rgb(36, 36, 36);
+    --bg2: rgb(54, 54, 54);
+    --bg3: rgb(36, 36, 36);
+    --bg4: rgb(36, 36, 36);
+    --bg5: rgb(66, 66, 66);
+    --textColor : white;
+}
 
 * {
 
@@ -63,31 +82,37 @@ body {
 
     height: 100vh;
     width: 100vw;
-    background-color: rgb(213, 215, 217);
+    background-color: var(--bg1);
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: background-color 500ms ease-out 0s;
 }
 
 nav {
 
     height: 10%;
     width: 100%;
-    background-color: rgb(142, 142, 142);
+    background-color: var(--bg2);
     display: flex;
     align-items: center;
-    color: rgb(0, 0, 0);
+    color: var(--textColor);
     font-family: "Varela Round", sans-serif;
+    transition: background-color 500ms ease-out 0s;
+}
+
+a {
+    text-decoration: none;
 }
 
 .linkIcons {
+
+    fill: var(--textColor);
     width: 20px;
-    color: aliceblue;
     margin-left: 10px;
 }
 
 .links {
-    margin-left: auto;
     margin-right: 20px;
 }
 
@@ -95,17 +120,21 @@ nav {
     
     margin-left: 10px;
     font-size: 15px;
+    font-weight: 700;
+    color: var(--textColor);
 }
 
 .convertorBox {
 
     width: 1000px;
     height: 60%;
-    background-color: white;
+    background-color: var(--bg2);
+    color: var(--textColor);
     margin-top: 80px;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 5px 5px 20px black;
+    transition: background-color 500ms ease-out 0s;
 }
 
 .convertArea {
@@ -118,12 +147,13 @@ nav {
 
 .title {
 
-    background-color: rgb(18, 18, 58);
+    background-color: var(--bg4);
     color: white;
     font-family: "Momo Trust Display", sans-serif;
     padding: 20px;
     font-size: 30px;
     text-align: center;
+    transition: background-color 500ms ease-out 0s;
 }
 
 .exchangeSvg {
@@ -155,6 +185,9 @@ nav {
 input {
     
     width: 190px;
+    color: var(--textColor);
+    background-color: var(--bg3);
+    transition: background-color 500ms ease-out 0s;
     outline: none;
     border: none;
     font-size: 20px;
@@ -166,7 +199,8 @@ input {
     width: 180px;
     height: 30px;
     border: 1px solid gray;
-    background-color: white;
+    background-color: var(--bg3);
+    transition: background-color 500ms ease-out 0s;
     font-size: 24px;
     font-family: "Calibri", sans-serif;
     display: flex;
@@ -202,6 +236,8 @@ input {
 .fromCurrSelect,
 .toCurrSelect {
 
+    background-color: var(--bg3);
+    transition: background-color 500ms ease-out 0s;
     font-family: "Varela Round", sans-serif;
     width: 100px;
     height: 30px;
@@ -233,7 +269,8 @@ input {
     overflow: scroll;
     position: absolute;
     top: 0;
-    background-color: white;
+    background-color: var(--bg3);
+    transition: background-color 500ms ease-out 0s;
     border: 1px solid gray;
 }
 
@@ -250,7 +287,7 @@ input {
 
 .fromOptions:hover,
 .toOptions:hover {
-    background-color: rgb(173, 210, 246);
+    background-color: var(--bg5);
 }
 
 .flags {
@@ -261,6 +298,7 @@ input {
 
 .equivalenceDiv {
 
+    background-color: var(--bg3);
     width: 50%;
     display: flex;
     justify-content: center;
@@ -272,5 +310,50 @@ input {
     font-family: "Calibri", sans-serif;
     font-weight: 400;
     font-size: 20px;
+    transition: background-color 500ms ease-out 0s;
 }
 
+.circle {
+
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+}
+
+@keyframes toggleDiv {
+    
+    from {
+        background-color: rgb(164, 164, 164);
+
+    }
+
+    to {
+        background-color: rgb(44, 44, 44);
+    }
+}
+
+@keyframes toggleCircle {
+    
+    from {
+        background-color: white;
+    }
+
+    to {
+        transform: translateX(30px);
+        background-color: gray;
+    }
+}
+
+.darkModeToggle {
+
+    height: 20px;
+    width: 50px;
+    box-shadow: 0px 0px 3px black inset;
+    border-radius: 20px;
+    padding: 4px;
+    background-color: rgb(164, 164, 164);
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: 20px;
+}
