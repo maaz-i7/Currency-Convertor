@@ -67,8 +67,8 @@ let toCurrSelect = document.querySelector('.toCurrSelect');
 let isFromDropped = false;
 let isToDropped = false;
 
-let prevFromInnerHTML;
-let prevToInnerHTML;
+let prevFromInnerHTML = fromCurrSelect.innerHTML;
+let prevToInnerHTML = toCurrSelect.innerHTML;
 
 fromCurrSelect.addEventListener('click', () => {
 
