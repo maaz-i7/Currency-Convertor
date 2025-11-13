@@ -54,7 +54,7 @@
         margin-bottom: 20px;
         margin-top: -10px !important;
     }
-    
+
     .lastUpdate {
         font-size: 10px !important;
     }
@@ -346,7 +346,7 @@ input {
     }
 
     to {
-        transform: translateX(150%);
+        transform: translateX(110%);
         background-color: gray;
     }
 }
@@ -362,11 +362,10 @@ input {
 .darkModeToggle {
 
     height: 20px;
-    width: 50px;
+    width: 40px;
     box-shadow: 0px 0px 3px black inset;
     border-radius: 20px;
     padding: 4px;
     background-color: rgb(164, 164, 164);
     cursor: pointer;
 }
-
