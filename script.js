@@ -67,18 +67,45 @@ let toCurrSelect = document.querySelector('.toCurrSelect');
 let isFromDropped = false;
 let isToDropped = false;
 
+let prevFromInnerHTML;
+let prevToInnerHTML;
+
 fromCurrSelect.addEventListener('click', () => {
 
-    if (isFromDropped === false) {
+    if (isFromDropped == false) {
 
         document.querySelector('.fromList').style.visibility = 'visible';
         isFromDropped = true;
+        prevFromInnerHTML = fromCurrSelect.innerHTML;
+        fromCurrSelect.innerHTML = '<input class="inputFromCurrName" width="100px" type="text" placeholder="Currency" autofocus>';
+        document.querySelector('.inputFromCurrName').style.display = 'inline';
+        document.querySelector('.inputFromCurrName').focus();
     }
 
     else {
 
         document.querySelector('.fromList').style.visibility = 'hidden';
         isFromDropped = false;
+        fromCurrSelect.innerHTML = prevFromInnerHTML;
+        for(let i = 0; i < 157; i++)
+        document.querySelector(`.fromOption${i}`).style.display = '';
+    }
+});
+        
+document.addEventListener('input', (e) => {
+
+    if (!e.target.matches('.inputFromCurrName')) 
+        return;
+
+    for (let i = 0; i < 157; i++) {
+
+        const fromOption = document.querySelector(`.fromCurrName${i}`);
+
+        if(fromOption.innerText.toLowerCase().includes(e.target.value.toLowerCase()))
+            document.querySelector(`.fromOption${i}`).style.display = '';
+
+        else
+            document.querySelector(`.fromOption${i}`).style.display = 'none';
     }
 });
 
@@ -88,12 +115,36 @@ toCurrSelect.addEventListener('click', () => {
 
         document.querySelector('.toList').style.visibility = 'visible';
         isToDropped = true;
+        prevToInnerHTML = toCurrSelect.innerHTML;
+        toCurrSelect.innerHTML = '<input class="inputToCurrName" width="100px" type="text" placeholder="Currency" autofocus>';
+        document.querySelector('.inputToCurrName').style.display = 'inline';
+        document.querySelector('.inputToCurrName').focus(); 
     }
 
     else {
 
         document.querySelector('.toList').style.visibility = 'hidden';
         isToDropped = false;
+        toCurrSelect.innerHTML = prevToInnerHTML;
+        for(let i = 0; i < 157; i++)
+        document.querySelector(`.toOption${i}`).style.display = '';
+    }
+});
+
+document.addEventListener('input', (e) => {
+
+    if (!e.target.matches('.inputToCurrName')) 
+        return;
+
+    for (let i = 0; i < 157; i++) {
+
+        const fromOption = document.querySelector(`.toCurrName${i}`);
+
+        if(fromOption.innerText.toLowerCase().includes(e.target.value.toLowerCase()))
+            document.querySelector(`.toOption${i}`).style.display = '';
+
+        else
+            document.querySelector(`.toOption${i}`).style.display = 'none';
     }
 });
 
@@ -101,9 +152,10 @@ for (let i = 0; i < 157; i++) {
 
     let fromOption = document.querySelector(`.fromOption${i}`);
 
-    fromOption.addEventListener('click', async () => {
-
+    fromOption.addEventListener('click', async (e) => {
+        
         fromCurrSelect.innerHTML = fromOption.innerHTML;
+        prevFromInnerHTML = fromCurrSelect.innerHTML;
         fromCurrSelect.setAttribute('data-value', (document.querySelector(`.fromCurrName${i}`).innerText));
         document.querySelector('.fromList').style.visibility = 'hidden';
 
@@ -119,6 +171,7 @@ for (let i = 0; i < 157; i++) {
     toOption.addEventListener('click',  async () => {
 
         toCurrSelect.innerHTML = toOption.innerHTML;
+        prevToInnerHTML = toCurrSelect.innerHTML;
         toCurrSelect.setAttribute('data-value', (document.querySelector(`.toCurrName${i}`).innerText));
         document.querySelector('.toList').style.visibility = 'hidden';
 
@@ -132,7 +185,14 @@ for (let i = 0; i < 157; i++) {
 
 document.querySelector('.amount').addEventListener('click', () => {
 
+    fromCurrSelect.innerHTML = prevFromInnerHTML;
+    for(let i = 0; i < 157; i++)
+    document.querySelector(`.fromOption${i}`).style.display = '';
     document.querySelector('.fromList').style.visibility = 'hidden';
+
+    toCurrSelect.innerHTML = prevToInnerHTML;
+    for(let i = 0; i < 157; i++)
+    document.querySelector(`.toOption${i}`).style.display = '';
     document.querySelector('.toList').style.visibility = 'hidden';
 });
 
@@ -158,6 +218,9 @@ exchange.addEventListener('click', async () => {
     let temp2 = fromCurrSelect.innerHTML;
     fromCurrSelect.innerHTML = toCurrSelect.innerHTML;
     toCurrSelect.innerHTML = temp2;
+
+    prevFromInnerHTML = fromCurrSelect.innerHTML;
+    prevToInnerHTML = toCurrSelect.innerHTML;
 
     let fromCurr = fromCurrSelect.dataset.value;
     let toCurr = toCurrSelect.dataset.value;
