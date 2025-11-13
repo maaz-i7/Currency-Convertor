@@ -7,7 +7,6 @@
     .convertorBox {
 
         width: 100vw !important;
-        height: 60vh !important;
         transform: scale(0.9) !important;
     }
 }
@@ -18,7 +17,7 @@
 
         margin-top: 5vw !important;
         width: 100vw !important;
-        height: 80vh !important;
+        height: 550px !important;
     }
 
     .convertArea {
@@ -141,10 +140,10 @@ a {
 .convertorBox {
 
     width: 1000px;
-    height: 60%;
+    height: 450px;
     background-color: var(--bg2);
     color: var(--textColor);
-    margin-top: 80px;
+    margin-top: 10vh;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 5px 5px 20px black;
@@ -277,7 +276,7 @@ input {
 .fromList,
 .toList {
 
-    width: 120px;
+    width: 117px;
     visibility: hidden;
     height: 200px;
     overflow: scroll;
@@ -368,4 +367,9 @@ input {
     padding: 4px;
     background-color: rgb(164, 164, 164);
     cursor: pointer;
+}
+
+.inputFromCurrName, .inputToCurrName {
+    display: none;
+    width: 100px;
 }
