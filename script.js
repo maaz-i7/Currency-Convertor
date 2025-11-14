@@ -1,33 +1,49 @@
 import { codes } from './codes.js';
 
+// Calling API----------------------------------------------------------------------------------------------------------------
 const url = "https://latest.currency-api.pages.dev/v1/currencies/eur.json";
-
-let data;
 
 async function callAPI(fromCurr, toCurr) {
 
     let response = await fetch(url);
-    data = await response.json();
+    let data = await response.json();
     document.querySelector('.lastUpdate').innerText = ("Last updated on: " + data.date);
     return [data.eur[fromCurr.toLowerCase()], data.eur[toCurr.toLowerCase()]];
 };
 
-async function update (fromCurr, toCurr, value) {
+const fromCurrSelect = document.querySelector('.fromCurrSelect');
+const toCurrSelect = document.querySelector('.toCurrSelect');
+const fromCurrName = document.querySelector('.fromCurrName');
+const toCurrName = document.querySelector('.toCurrName');
+const input = document.querySelector('.inputAmt');
 
-    let x = await callAPI(fromCurr, toCurr);
-    value = Number(((x[1] / x[0]) * (input.value))).toFixed(4);
-    document.querySelector('.value').innerText = value;
 
-    let equiv = document.querySelector('.equivalenceDiv');
+async function update (fromCurr, toCurr, inpVal) {
+
+    //eurVal[0] -> EUR equivalent of from currency
+    //eurVal[1] -> EUR equivalent of to currency
+    let eurVal = await callAPI(fromCurr, toCurr);
+    document.querySelector('.value').innerText = Number(((eurVal[1] / eurVal[0]) * (inpVal))).toFixed(4);
+
+    const equiv = document.querySelector('.equivalenceDiv');
     let equivHTML = "1&nbsp;&nbsp;";
-    equivHTML += (fromCurrSelect.innerHTML + "&nbsp;&nbsp=&nbsp;&nbsp;");
-    equivHTML += (Number(((x[1] / x[0]))).toFixed(4) + "&nbsp;&nbsp;");
-    equivHTML += (toCurrSelect.innerHTML);
+    equivHTML += (fromCurrName.innerHTML + "&nbsp;&nbsp=&nbsp;&nbsp;");
+    equivHTML += (Number(((eurVal[1] / eurVal[0]))).toFixed(4) + "&nbsp;&nbsp;");
+    equivHTML += (toCurrName.innerHTML);
     equiv.innerHTML = equivHTML;
 }
 
-let fromList = document.querySelector('.fromList');
-let toList = document.querySelector('.toList');
+async function updateValue() {
+
+    let fromCurrVal = fromCurrSelect.dataset.value;
+    let toCurrVal = toCurrSelect.dataset.value;
+
+    console.log(fromCurrVal + " " + toCurrVal);
+
+    await update(fromCurrVal, toCurrVal, input.value);
+}
+
+// Adding currency names and flags-------------------------------------------------------------------------------------------------------
 
 let id = 0;
 
@@ -58,40 +74,103 @@ for (let curr in codes) {
     id++;
 }
 
-fromList.innerHTML = fromListHTML;
-toList.innerHTML = toListHTML;
+document.querySelector('.fromList').innerHTML = fromListHTML;
+document.querySelector('.toList').innerHTML = toListHTML;
 
-let fromCurrSelect = document.querySelector('.fromCurrSelect');
-let toCurrSelect = document.querySelector('.toCurrSelect');
+// To open list and input box on click----------------------------------------------------------------------------------------------------
 
-let isFromDropped = false;
-let isToDropped = false;
+//to give input to enter curreny name and show list of available currenices
+fromCurrName.addEventListener('click', (e) => {
 
-let prevFromInnerHTML = fromCurrSelect.innerHTML;
-let prevToInnerHTML = toCurrSelect.innerHTML;
+    e.stopPropagation();//This excludes this area for 'Close the list when clicked anywhere'
 
-fromCurrSelect.addEventListener('click', () => {
+    fromCurrName.style.display = 'none'; //hides the current currency block
+    const input = document.querySelector('.inputFromCurrName');
+    input.style.display = 'inline'; //diplays input to enter currency name
+    input.focus(); //autofocuses input
+    document.querySelector('.fromList').style.visibility = 'visible'; //makes the currency list visible
+});
 
-    if (isFromDropped == false) {
+//to give input to enter curreny name and show list of available currenices
+toCurrName.addEventListener('click', (e) => {
 
-        document.querySelector('.fromList').style.visibility = 'visible';
-        isFromDropped = true;
-        prevFromInnerHTML = fromCurrSelect.innerHTML;
-        fromCurrSelect.innerHTML = '<input class="inputFromCurrName" width="100px" type="text" placeholder="Currency" autofocus>';
-        document.querySelector('.inputFromCurrName').style.display = 'inline';
-        document.querySelector('.inputFromCurrName').focus();
-    }
+    e.stopPropagation();//This excludes this area for 'Close the list when clicked anywhere'
 
-    else {
+    toCurrName.style.display = 'none'; //hides the current currency block
+    const input = document.querySelector('.inputToCurrName');
+    input.style.display = 'inline'; //diplays input to enter currency name
+    input.focus(); //autofocuses input
+    document.querySelector('.toList').style.visibility = 'visible'; //makes the currency list visible
+});
 
-        document.querySelector('.fromList').style.visibility = 'hidden';
-        isFromDropped = false;
-        fromCurrSelect.innerHTML = prevFromInnerHTML;
-        for(let i = 0; i < 157; i++)
+// Closing lists--------------------------------------------------------------------------------------------------------------------------
+
+function closeLists() {
+    
+    document.querySelector('.inputFromCurrName').style.display = 'none'; //hides the input
+    document.querySelector('.fromList').style.visibility = 'hidden'; //hide the list of currencies
+    fromCurrName.style.display = 'flex'; //display the current currency block
+
+    document.querySelector('.inputToCurrName').style.display = 'none'; //hides the input
+    document.querySelector('.toList').style.visibility = 'hidden'; //hide the list of currencies
+    toCurrName.style.display = 'flex'; //display the current currency block
+
+    document.querySelector('.inputToCurrName').value = ""; //remove previously written text
+    document.querySelector('.inputFromCurrName').value = ""; //remove previously written text
+
+    //restore hidden list items
+    for(let i = 0; i < 157; i++) {
+
+        document.querySelector(`.toOption${i}`).style.display = '';
         document.querySelector(`.fromOption${i}`).style.display = '';
     }
-});
+}
+
+//Hide the list of currencies when clicked anywhere
+document.body.addEventListener('click', (e) => {
+    
+    closeLists();
+})
+
+//Selecting currencies from lists-------------------------------------------------------------------------------------------------------------
+
+for (let i = 0; i < 157; i++) {
+
+    const fromOption = document.querySelector(`.fromOption${i}`);
+    fromOption.addEventListener('click', async (e) => {
         
+        fromCurrName.innerHTML = fromOption.innerHTML;
+        fromCurrSelect.setAttribute('data-value', (document.querySelector(`.fromCurrName${i}`).innerText));
+        closeLists();
+
+        updateValue();
+    });
+
+    const toOption = document.querySelector(`.toOption${i}`);
+    toOption.addEventListener('click',  async () => {
+
+        toCurrName.innerHTML = toOption.innerHTML;
+        toCurrSelect.setAttribute('data-value', (document.querySelector(`.toCurrName${i}`).innerText));
+        closeLists();
+
+        updateValue();
+    });
+}
+
+// Stop propagation of click from input boxes
+
+document.querySelector('.inputToCurrName').addEventListener('click', (e) => {
+    
+    e.stopPropagation();
+});
+
+document.querySelector('.inputFromCurrName').addEventListener('click', (e) => {
+    
+    e.stopPropagation();
+});
+
+// Match input currency name-------------------------------------------------------------------------------------------------------------
+
 document.addEventListener('input', (e) => {
 
     if (!e.target.matches('.inputFromCurrName')) 
@@ -109,28 +188,6 @@ document.addEventListener('input', (e) => {
     }
 });
 
-toCurrSelect.addEventListener('click', () => {
-
-    if (isToDropped === false) {
-
-        document.querySelector('.toList').style.visibility = 'visible';
-        isToDropped = true;
-        prevToInnerHTML = toCurrSelect.innerHTML;
-        toCurrSelect.innerHTML = '<input class="inputToCurrName" width="100px" type="text" placeholder="Currency" autofocus>';
-        document.querySelector('.inputToCurrName').style.display = 'inline';
-        document.querySelector('.inputToCurrName').focus(); 
-    }
-
-    else {
-
-        document.querySelector('.toList').style.visibility = 'hidden';
-        isToDropped = false;
-        toCurrSelect.innerHTML = prevToInnerHTML;
-        for(let i = 0; i < 157; i++)
-        document.querySelector(`.toOption${i}`).style.display = '';
-    }
-});
-
 document.addEventListener('input', (e) => {
 
     if (!e.target.matches('.inputToCurrName')) 
@@ -138,9 +195,9 @@ document.addEventListener('input', (e) => {
 
     for (let i = 0; i < 157; i++) {
 
-        const fromOption = document.querySelector(`.toCurrName${i}`);
+        const toOption = document.querySelector(`.toCurrName${i}`);
 
-        if(fromOption.innerText.toLowerCase().includes(e.target.value.toLowerCase()))
+        if(toOption.innerText.toLowerCase().includes(e.target.value.toLowerCase()))
             document.querySelector(`.toOption${i}`).style.display = '';
 
         else
@@ -148,66 +205,16 @@ document.addEventListener('input', (e) => {
     }
 });
 
-for (let i = 0; i < 157; i++) {
-
-    let fromOption = document.querySelector(`.fromOption${i}`);
-
-    fromOption.addEventListener('click', async (e) => {
-        
-        fromCurrSelect.innerHTML = fromOption.innerHTML;
-        prevFromInnerHTML = fromCurrSelect.innerHTML;
-        fromCurrSelect.setAttribute('data-value', (document.querySelector(`.fromCurrName${i}`).innerText));
-        document.querySelector('.fromList').style.visibility = 'hidden';
-
-        let fromCurr = fromCurrSelect.dataset.value;
-        let toCurr = toCurrSelect.dataset.value;
-        let value;
-
-        await update(fromCurr, toCurr, value);
-    });
-
-    let toOption = document.querySelector(`.toOption${i}`);
-
-    toOption.addEventListener('click',  async () => {
-
-        toCurrSelect.innerHTML = toOption.innerHTML;
-        prevToInnerHTML = toCurrSelect.innerHTML;
-        toCurrSelect.setAttribute('data-value', (document.querySelector(`.toCurrName${i}`).innerText));
-        document.querySelector('.toList').style.visibility = 'hidden';
-
-        let fromCurr = fromCurrSelect.dataset.value;
-        let toCurr = toCurrSelect.dataset.value;
-        let value;
-
-        await update(fromCurr, toCurr, value);
-    });
-}
-
-document.querySelector('.amount').addEventListener('click', () => {
-
-    fromCurrSelect.innerHTML = prevFromInnerHTML;
-    for(let i = 0; i < 157; i++)
-    document.querySelector(`.fromOption${i}`).style.display = '';
-    document.querySelector('.fromList').style.visibility = 'hidden';
-
-    toCurrSelect.innerHTML = prevToInnerHTML;
-    for(let i = 0; i < 157; i++)
-    document.querySelector(`.toOption${i}`).style.display = '';
-    document.querySelector('.toList').style.visibility = 'hidden';
-});
-
-let input = document.querySelector('.inputAmt');
+// Update currency equivalent as soon as value entered-----------------------------------------------------------------------------------
 
 input.addEventListener('input', async () => {
 
-    let fromCurr = fromCurrSelect.dataset.value;
-    let toCurr = toCurrSelect.dataset.value;
-    let value;
-
-    await update(fromCurr, toCurr, value);
+    updateValue();
 });
 
-let exchange = document.querySelector('.exchangeSvg');
+
+// Functioning of exchange button---------------------------------------------------------------------------------------------------------
+const exchange = document.querySelector('.exchangeSvg');
 
 exchange.addEventListener('click', async () => {
 
@@ -215,20 +222,15 @@ exchange.addEventListener('click', async () => {
     fromCurrSelect.dataset.value = toCurrSelect.dataset.value;
     toCurrSelect.dataset.value = temp1;
 
-    let temp2 = fromCurrSelect.innerHTML;
-    fromCurrSelect.innerHTML = toCurrSelect.innerHTML;
-    toCurrSelect.innerHTML = temp2;
+    let temp2 = fromCurrName.innerHTML;
+    fromCurrName.innerHTML = toCurrName.innerHTML;
+    toCurrName.innerHTML = temp2;
 
-    prevFromInnerHTML = fromCurrSelect.innerHTML;
-    prevToInnerHTML = toCurrSelect.innerHTML;
-
-    let fromCurr = fromCurrSelect.dataset.value;
-    let toCurr = toCurrSelect.dataset.value;
-    let value;
-
-    await update(fromCurr, toCurr, value);
+    updateValue();
 });
 
+
+// Dark mode toggle logic-----------------------------------------------------------------------------------------------------------------
 let isLight = true;
 
 let toggleButton = document.querySelector('.darkModeToggle');
