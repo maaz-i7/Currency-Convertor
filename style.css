@@ -197,7 +197,6 @@ a {
 
 input {
     
-    width: 190px;
     color: var(--textColor);
     background-color: var(--bg3);
     transition: background-color 500ms ease-out 0s;
@@ -244,23 +243,6 @@ input {
 .toDiv {
 
     width: 330px;
-}
-
-.fromCurrSelect,
-.toCurrSelect {
-
-    background-color: var(--bg3);
-    transition: background-color 500ms ease-out 0s;
-    font-family: "Varela Round", sans-serif;
-    width: 100px;
-    height: 30px;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border: 1px solid gray;
-    border-radius: 5px;
 }
 
 .fromListDiv,
@@ -369,8 +351,28 @@ input {
     cursor: pointer;
 }
 
-.inputFromCurrName, .inputToCurrName {
-    display: none;
+.fromCurrName, .toCurrName {
+
+    height: 30px;
     width: 100px;
+    background-color: var(--bg3);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Varela Round", sans-serif;
+    cursor: pointer;
+    transition: background-color 500ms ease-out 0s;
 }
 
+.inputFromCurrName, .inputToCurrName {
+    
+    height: 30px;
+    width: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    display: none;
+}
