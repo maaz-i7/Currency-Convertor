@@ -345,7 +345,7 @@ input {
     }
 
     to {
-        transform: translateX(110%);
+        transform: translateX(100%);
         background-color: gray;
     }
 }
@@ -373,3 +373,4 @@ input {
     display: none;
     width: 100px;
 }
+
